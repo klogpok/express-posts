@@ -56,6 +56,8 @@ class Post {
         });
     }
 
+    
+
     static async getPostById(id) {
         const posts = await this.getAllPosts();
 
@@ -70,6 +72,25 @@ class Post {
                     resolve(JSON.parse(content));
                 }
             });
+        });
+    }
+
+    static async delete(id) {
+        let posts = await Post.getAllPosts();
+        posts = posts.filter(post => post.id !== id);
+
+        return new Promise((resolve, reject) => {
+            fs.writeFile(
+                path.join(__dirname, '..', 'data', 'posts.json'),
+                JSON.stringify(posts),
+                'utf-8',
+                err => {
+                    if (err) reject(err);
+                    else {
+                        resolve();
+                    }
+                }
+            );
         });
     }
 }

@@ -24,7 +24,19 @@ router.get('/:id', async (req, res) => {
 
 router.post('/edit', async (req, res) => {
     await Post.update(req.body);
-    res.redirect('/');
+    res.redirect('/posts');
+});
+
+router.get('/:id/delete', async (req, res) => {
+    // const post = await Post.getPostById(req.params.id);
+
+    if (!req.query.allow) {
+        return res.redirect('/posts');
+    } else {
+        await Post.delete(req.params.id);
+        // res.render('/posts', {  title: 'Posts', isPost: true });
+        res.redirect('/posts');
+    }   
 });
 
 module.exports = router;
