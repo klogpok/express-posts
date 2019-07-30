@@ -54,9 +54,7 @@ class Post {
                 }
             );
         });
-    }
-
-    
+    }    
 
     static async getPostById(id) {
         const posts = await this.getAllPosts();
