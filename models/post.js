@@ -24,7 +24,7 @@ class Post {
 
         return new Promise((resolve, reject) => {
             fs.writeFile(
-                path.join(__dirname, '..', 'data', 'posts.json'),
+                path.join(__dirname, '..', 'db', 'posts.json'),
                 JSON.stringify(posts),
                 'utf-8',
                 err => {
@@ -43,7 +43,7 @@ class Post {
 
         return new Promise((resolve, reject) => {
             fs.writeFile(
-                path.join(__dirname, '..', 'data', 'posts.json'),
+                path.join(__dirname, '..', 'data', 'db.json'),
                 JSON.stringify(posts),
                 'utf-8',
                 err => {
@@ -64,7 +64,7 @@ class Post {
 
     static getAllPosts() {
         return new Promise((resolve, reject) => {
-            fs.readFile(path.join(__dirname, '..', 'data', 'posts.json'), 'utf-8', (err, content) => {
+            fs.readFile(path.join(__dirname, '..', 'data', 'db.json'), 'utf-8', (err, content) => {
                 if (err) reject(err);
                 else {
                     resolve(JSON.parse(content));
@@ -79,7 +79,7 @@ class Post {
 
         return new Promise((resolve, reject) => {
             fs.writeFile(
-                path.join(__dirname, '..', 'data', 'posts.json'),
+                path.join(__dirname, '..', 'data', 'db.json'),
                 JSON.stringify(posts),
                 'utf-8',
                 err => {

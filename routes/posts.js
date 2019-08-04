@@ -3,8 +3,7 @@ const Post = require('../models/post');
 
 router.get('/', async (req, res) => {
   const posts = await Post.getAllPosts();
-
-  res.render('posts', { title: 'Posts', posts, isPosts: true });
+  res.send(posts);
 });
 
 router.get('/:id/edit', async (req, res) => {
@@ -19,7 +18,7 @@ router.get('/:id/edit', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   const post = await Post.getPostById(req.params.id);
-  res.render('post', { post, isPost: true });
+  res.send(post);
 });
 
 router.post('/edit', async (req, res) => {
