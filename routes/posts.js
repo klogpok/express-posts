@@ -22,8 +22,10 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/edit', async (req, res) => {
+  console.log(req.body);
   await Post.update(req.body);
-  res.redirect('/posts');
+  // res.redirect('/posts');
+  res.end();
 });
 
 router.get('/:id/delete', async (req, res) => {
