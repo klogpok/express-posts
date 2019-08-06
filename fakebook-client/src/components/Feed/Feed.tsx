@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import Post from '../Post/Post';
 
 interface IPost {
@@ -7,7 +9,7 @@ interface IPost {
   text: string;
 }
 
-const Feed: React.FC = () => {
+const Feed: React.FC<RouteComponentProps> = ({ match, history }) => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -19,13 +21,16 @@ const Feed: React.FC = () => {
   }, []);
 
   function renderPosts() {
-    return posts.map((post: any) => <Post post={post} key={post.id} />);
-
-    // console.log(data);
-    // posts.forEach(post => console.log(post))
+    return posts.map((post: any) => (
+      <Post post={post} key={post.id} deletePost={deletePostHandler} />
+    ));
   }
 
-  renderPosts();
+  async function deletePostHandler(id) {
+    console.log(history);
+    await fetch(`/api/posts/${id}/delete`);
+    history.push('/');
+  }
 
   return (
     <div>
@@ -35,4 +40,4 @@ const Feed: React.FC = () => {
   );
 };
 
-export default Feed;
+export default withRouter(Feed);

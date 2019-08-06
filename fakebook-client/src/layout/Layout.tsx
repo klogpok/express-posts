@@ -6,9 +6,9 @@ interface IProps {}
 class Layout extends Component<IProps> {
   render() {
     return (
-      <div className="">
-        <header>
-          <nav>
+      <>
+        <header className="">
+          <nav className="teal">
             <div className="nav-wrapper container">
               <Link to="/">HOME</Link>
               <ul id="nav-mobile" className="right hide-on-med-and-down">
@@ -23,7 +23,7 @@ class Layout extends Component<IProps> {
           </nav>
         </header>
         <main>{this.props.children}</main>
-      </div>
+      </>
     );
   }
 }

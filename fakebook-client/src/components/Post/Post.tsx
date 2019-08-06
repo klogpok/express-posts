@@ -3,10 +3,17 @@ import { Link } from 'react-router-dom';
 
 interface IProps {
   post: { id: string; title: string; text: string };
+  deletePost: Function;
 }
 
-const Post: React.FC<IProps> = ({ post }) => {
-  const { id, title, text } = post;
+const Post: React.FC<IProps> = props => {
+  const { id, title, text } = props.post;
+
+  const handleClick = e => {
+    e.preventDefault();
+    props.deletePost(id);
+  };
+
   return (
     <div className="col s12 m6">
       <div className="card grey lighten-5">
@@ -16,9 +23,9 @@ const Post: React.FC<IProps> = ({ post }) => {
         </div>
         <div className="card-action">
           <Link to={`edit/${id}`}>Edit post</Link>
-          <Link to="/delete" className="red-text">
+          <a href="/" className="red-text" onClick={handleClick}>
             Delete post
-          </Link>
+          </a>
         </div>
       </div>
     </div>

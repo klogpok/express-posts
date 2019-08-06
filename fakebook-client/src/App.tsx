@@ -9,7 +9,7 @@ import './App.css';
 const App: React.FC = () => {
   let routes = (
     <Switch>
-      <Route path="/feed" component={Feed} />
+      <Route path="/feed" exact component={Feed} />
       <Route path="/create-post" component={CreateForm} />
       <Route path="/edit/:id" exact component={EditForm} />
       <Redirect to="/" />

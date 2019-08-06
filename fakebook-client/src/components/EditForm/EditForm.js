@@ -21,20 +21,14 @@ const EditForm = ({ match, history }) => {
     setPost({ ...post, [e.target.name]: e.target.value });
   };
 
-  const editHandler = e => {
+  const editHandler = async e => {
     e.preventDefault();
 
-    // const j = JSON.stringify(post);
-
-    // const x = `"sds": "sdsd"`;
-
-    // console.log(j);
-
-    // fetch('/api/posts/edit/', {
-    //   method: 'post',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: { j },
-    // });
+    await fetch('/api/posts/edit', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json;charset=utf-8' },
+      body: JSON.stringify(post),
+    });
 
     history.push(`/feed`);
   };
@@ -43,7 +37,7 @@ const EditForm = ({ match, history }) => {
     <>
       <h3>Edit post</h3>
       {post && (
-        <form action="/add" method="POST" onSubmit={editHandler}>
+        <form onSubmit={editHandler}>
           <div className="input-field">
             <input
               id="title"
