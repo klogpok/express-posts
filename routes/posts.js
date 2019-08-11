@@ -6,35 +6,20 @@ router.get('/', async (req, res) => {
   res.send(posts);
 });
 
-router.get('/:id/edit', async (req, res) => {
-  const post = await Post.getPostById(req.params.id);
-
-  if (!req.query.allow) {
-    return res.redirect('/');
-  } else {
-    res.render('edit-post', { title: `Edit ${post.title}`, post, isPostEdit: true });
-  }
-});
-
 router.get('/:id', async (req, res) => {
   const post = await Post.getPostById(req.params.id);
   res.send(post);
 });
 
 router.post('/edit', async (req, res) => {
-  console.log(req.body);
   await Post.update(req.body);
-  // res.redirect('/posts');
   res.end();
 });
 
 router.get('/:id/delete', async (req, res) => {
-  if (!req.query.allow) {
-    return res.redirect('/posts');
-  } else {
-    await Post.delete(req.params.id);
-    res.redirect('/posts');
-  }
+  console.log(req.params.id);
+  await Post.delete(req.params.id);
+  res.end();
 });
 
 module.exports = router;
